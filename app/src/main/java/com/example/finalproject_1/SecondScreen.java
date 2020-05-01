@@ -10,7 +10,7 @@ import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
 //import java.awt.Image;
-//import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImage;
 //import java.io.File;
 //import java.io.IOException;
 //import java.net.URL;
@@ -42,11 +42,14 @@ public class SecondScreen extends AppCompatActivity {
     public int rows;
     public ImageView imageView;
 
+//    public Bitmap getImage() {
+//        return Bitmap.createBitmap(fileName);
+//    }
+
     public void SplitImage(String setFileName, int setRows, int setColumns) {
         fileName = setFileName;
         columns = setColumns;
         rows = setRows;
-
 
 
         //https://gist.github.com/madan712/3672616
@@ -57,6 +60,7 @@ public class SecondScreen extends AppCompatActivity {
             URL url = new URL(fileName);
             Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             imageView.setImageBitmap(bmp);
+            System.out.print(bmp);
 
 //                File file = new File(fileName);
 //                Image image = new Image(file.toURI().toString());
@@ -83,10 +87,14 @@ public class SecondScreen extends AppCompatActivity {
                     try {
                         System.out.println("creating piece: " + i + " " + j);
 
-                        BufferedImage SubImage = bmp.getSubimage(y, x, eWidth, eHeight);
-                        File outputfile = new File(fileName + i + j + ".jpg");
-                        ImageIO.write(SubImage, "jpg", outputfile);
+                        //BufferedImage SubImage = bmp.getSubImage(y, x, eWidth, eHeight);
+                        //Bitmap SubImage = bmp.getSubImage(y, x, eWidth, eHeight);
+                        Bitmap SubImage = Bitmap.createBitmap(bmp, y, x, eWidth, eHeight);
+                        File outputFile = new File(fileName + i + j + ".jpg");
+                        //ImageIO.write(SubImage, "jpg", outputFile);
 
+                        BitmapFactory.decodeFile(fileName + i + j + "jpg");
+                        
                         y += eWidth;
 
                     } catch (Exception e) {
@@ -100,4 +108,5 @@ public class SecondScreen extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 }
