@@ -35,6 +35,12 @@ public class SecondScreen extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         });
+        Button enterImage = findViewById(R.id.enterImage);
+        enterImage.setOnClickListener(v -> {
+            startActivity(new Intent(this, ThirdScreen.class));
+            finish();
+
+        });
     }
 
 
