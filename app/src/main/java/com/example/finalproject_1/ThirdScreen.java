@@ -28,7 +28,7 @@ public class ThirdScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.screen_second);
+        setContentView(R.layout.thirdscreen);
         Intent intent = getIntent();
         fileName = intent.getStringExtra("URL");
         imageView = findViewById(R.id.imageView);
@@ -38,8 +38,10 @@ public class ThirdScreen extends AppCompatActivity {
             URL url = new URL(fileName);
             Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             imageView.setImageBitmap(bmp);
+            System.out.println(bmp);
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.print("fAIL");
         }
 
         //EditText imageSource = findViewById(R.id.imageSource);
@@ -65,6 +67,7 @@ public class ThirdScreen extends AppCompatActivity {
             Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             imageView.setImageBitmap(bmp);
             System.out.print(bmp);
+            System.out.print("PLEASE WORK");
 
 //                File file = new File(fileName);
 //                Image image = new Image(file.toURI().toString());
