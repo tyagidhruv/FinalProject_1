@@ -3,8 +3,10 @@ package com.example.finalproject_1;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
 public class ThirdScreen extends AppCompatActivity {
@@ -32,17 +35,25 @@ public class ThirdScreen extends AppCompatActivity {
         Intent intent = getIntent();
         fileName = intent.getStringExtra("URL");
         imageView = findViewById(R.id.imageView);
-        try {
-
-            //Provide number of rows and column
-            URL url = new URL(fileName);
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            imageView.setImageBitmap(bmp);
-            System.out.println(bmp);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.print("fAIL");
-        }
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(v -> {
+            startActivity(new Intent(this, SecondScreen.class));
+            finish();
+        });
+//        try {
+//
+//            //Provide number of rows and column
+//            //URL url = new URL(fileName);
+//            URL url = new URL("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
+//            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//            imageView.setImageBitmap(bmp);
+//            System.out.println(bmp);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.print("fAIL");
+//        }
+        new DownloadImageTask((ImageView) imageView)
+                .execute(fileName);
 
         //EditText imageSource = findViewById(R.id.imageSource);
         //imageSource.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -51,6 +62,30 @@ public class ThirdScreen extends AppCompatActivity {
 //            startActivity(new Intent(this, ThirdScreen.class));
 //            finish();
 //        });
+    }
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
     public void SplitImage(String setFileName, int setRows, int setColumns) {
         fileName = setFileName;
