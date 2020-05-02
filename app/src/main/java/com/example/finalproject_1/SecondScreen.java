@@ -31,16 +31,19 @@ public class SecondScreen extends AppCompatActivity {
         EditText imageSource = findViewById(R.id.imageSource);
         imageSource.setInputType(InputType.TYPE_CLASS_TEXT);
         Button enterURL = findViewById(R.id.enterURL);
-        enterURL.setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        });
-        Button next = findViewById(R.id.next);
-        next.setOnClickListener(v -> {
-            startActivity(new Intent(this, ThirdScreen.class));
-            finish();
 
+        enterURL.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ThirdScreen.class);
+            intent.putExtra("URL", imageSource.getText().toString());
+            startActivity(intent);
+            finish();
         });
+//        Button next = findViewById(R.id.next);
+//        next.setOnClickListener(v -> {
+//            startActivity(new Intent(this, ThirdScreen.class));
+//            finish();
+
+//        });
     }
 
 

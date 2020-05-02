@@ -1,14 +1,21 @@
 package com.example.finalproject_1;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.text.InputType;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-public class ThirdScreen {
+public class ThirdScreen extends AppCompatActivity {
     public String fileName;
     public int columns;
     public int rows;
@@ -18,6 +25,31 @@ public class ThirdScreen {
 //        return Bitmap.createBitmap(fileName);
 //    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.screen_second);
+        Intent intent = getIntent();
+        fileName = intent.getStringExtra("URL");
+        imageView = findViewById(R.id.imageView);
+        try {
+
+            //Provide number of rows and column
+            URL url = new URL(fileName);
+            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            imageView.setImageBitmap(bmp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //EditText imageSource = findViewById(R.id.imageSource);
+        //imageSource.setInputType(InputType.TYPE_CLASS_TEXT);
+//        Button enterURL = findViewById(R.id.enterURL);
+//        enterURL.setOnClickListener(v -> {
+//            startActivity(new Intent(this, ThirdScreen.class));
+//            finish();
+//        });
+    }
     public void SplitImage(String setFileName, int setRows, int setColumns) {
         fileName = setFileName;
         columns = setColumns;
@@ -81,4 +113,6 @@ public class ThirdScreen {
             e.printStackTrace();
         }
     }
+
+
 }

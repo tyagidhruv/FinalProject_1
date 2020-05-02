@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/enterURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BACK" />
+        android:text="NEXT" />
 
     <TextView
         android:id="@+id/userText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Enter URL" />
+
     <EditText
         android:id="@+id/imageSource"
         android:layout_width="wrap_content"
@@ -24,12 +26,6 @@
         android:layout_marginEnd="134dp"
         android:layout_marginRight="134dp"
         android:layout_marginBottom="469dp"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00D51414"
-        android:text="Next" />
 </LinearLayout>
